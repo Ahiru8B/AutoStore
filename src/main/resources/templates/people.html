@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>People</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Фамилия</th>
+			<th>Имя</th>
+			<th>Отчество</th>
+			<th>Телефон</th>
+			<th>Удалить</th>
+			<th>Редактировать</th>
+		</tr>
+		<tr th:each="person : ${people}" th:id="${person.id}">
+			<td th:text="${person.surname}"></td>
+			<td th:text="${person.name}"></td>
+			<td th:text="${person.patronymic}"></td>
+			<td th:text="${person.number}"></td>
+			<td><button class="removeButton">Удалить</button></td>
+			<td><button class="editButton">Редактировать</button></td>
+		</tr>
+		<tr id="emptyString">
+			<td colspan="6"><button id="newPerson">Добавить</button></td>
+		</tr>
+	</table>
+	
+	<script type="text/javascript" th:src="@{/scripts/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{/scripts/person.js}"></script>
+</body>
+</html>
