@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Receipt</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Деталь</th>
+			<th>Количество</th>
+			<th>Стоимость</th>
+			<th>Сумма</th>
+			<th>Удалить</th>
+			<th>Редактировать</th>
+		</tr>
+		<tr th:each="item : ${items}" th:id="${item.id}">
+			<td th:text="${item.detail.name}"></td>
+			<td th:text="${item.count}"></td>
+			<td th:text="${item.detail.price}"></td>
+			<td th:text="${item.price}"></td>
+			<td><button class="removeButton">Удалить</button></td>
+			<td><button class="editButton">Редактировать</button></td>
+		</tr>
+
+	</table>
+	<div>
+		<p>Добавить</p>
+		<label for="details">Выберите деталь:</label> <select id="selectDetail"
+			name="details">
+			<option th:each="detail : ${details}" th:value="${detail.id}" th:text="${detail.name}"></option>
+		</select>
+		<input type="number" id="count" name="countDetail" min="1" max="100" />
+	</div>
+	<script type="text/javascript" th:src="@{/scripts/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{/scripts/detail.js}"></script>
+</body>
+</html>
