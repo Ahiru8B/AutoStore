@@ -10,39 +10,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ahiru8b.autostore.model.Person;
-import com.ahiru8b.autostore.service.PersonService;
+import com.ahiru8b.autostore.model.Detail;
+import com.ahiru8b.autostore.service.DetailService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/person/")
+@RequestMapping("/api/detail/")
 @Slf4j
-public class PersonApi {
+public class DetailApi {
 	@Autowired
-	private PersonService personService;
+	private DetailService detailService;
 
 	@PostMapping
-	public Person save(@RequestBody Person person) {
-		log.info("Попытка сохранить person = {}", person);
-		return personService.save(person);
+	public Detail save(@RequestBody Detail detail) {
+		log.info("Попытка сохранить detail = {}", detail);
+		return detailService.save(detail);
 	}
 
 	@DeleteMapping("{id}")
-	public Person delete(@PathVariable Integer id) {
-		log.info("Попытка удалить person с id = {}", id);
-		return personService.deleteById(id);
+	public Detail delete(@PathVariable Integer id) {
+		log.info("Попытка удалить detail с id = {}", id);
+		return detailService.deleteById(id);
 	}
 
 	@GetMapping("{id}")
-	public Person get(@PathVariable Integer id) {
-		log.info("Попытка получить person с id = {}", id);
-		return personService.findById(id);
+	public Detail get(@PathVariable Integer id) {
+		log.info("Попытка получить detail с id = {}", id);
+		return detailService.findById(id);
 	}
 
 	@PutMapping
-	public Person put(@RequestBody Person person) {
-		return personService.update(person);
+	public Detail put(@RequestBody Detail detail) {
+		return detailService.update(detail);
 	}
 
 }

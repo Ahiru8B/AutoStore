@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Details</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Название</th>
+			<th>Цена</th>
+		</tr>
+		<tr th:each="detail : ${details}" th:id="${detail.id}">
+			<td th:text="${detail.name}"></td>
+			<td th:text="${detail.price}"></td>
+			<td><button class="removeButton">Удалить</button></td>
+			<td><button class="editButton">Редактировать</button></td>
+		</tr>
+		<tr id="emptyString">
+			<td colspan="2"><button id="newDetail">Добавить</button></td>
+		</tr>
+	</table>
+	
+	<script type="text/javascript" th:src="@{/scripts/jquery.js}"></script>
+	<script type="text/javascript" th:src="@{/scripts/detail.js}"></script>
+</body>
+</html>

@@ -40,4 +40,25 @@ public class PersonService {
 			return null;
 		}
 	}
+
+	public Person update(Person person) {
+		Optional<Person> savedPerson = personDao.findById(person.getId());
+		if (savedPerson.isEmpty()) {
+			return null;
+		} else {
+			if (!person.getName().isBlank()) {
+				savedPerson.get().setName(person.getName());
+			}
+			if (!person.getNumber().isBlank()) {
+				savedPerson.get().setNumber(person.getNumber());
+			}
+			if (!person.getPatronymic().isBlank()) {
+				savedPerson.get().setPatronymic(person.getPatronymic());
+			}
+			if (!person.getSurname().isBlank()) {
+				savedPerson.get().setSurname(person.getSurname());
+			}
+		}
+		return personDao.save(savedPerson.get());
+	}
 }

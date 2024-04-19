@@ -86,7 +86,7 @@ $(document).ready(() => {
 	function edit(button) {
 		let id = button.parent().parent().attr("id");
 		console.log("id = " + id);
-		$("#" + id).replaceWith("<tr id='" + id + "'><td><input id='surname'></input></td><td><input id='name'></input></td><td><input id='patronymic'></input></td><td><input id='number'></input></td><td><button id='close'>Отменить</button></td><td><button id='accept'>Применить</button></td>");
+		$("#" + id).replaceWith("<tr id='" + id + "'><td><input id='editSurname'></input></td><td><input id='editName'></input></td><td><input id='editPatronymic'></input></td><td><input id='editNumber'></input></td><td><button id='close'>Отменить</button></td><td><button id='accept'>Применить</button></td>");
 	}
 
 	$("body").on("click", "#close", function() {
@@ -118,7 +118,42 @@ $(document).ready(() => {
 	})
 
 	$("body").on("click", "#accept", function() {
-		edit($(this));
+		console.log("accept");
+		let elementId = $(this).parent().parent().attr("id");
+		console.log("id = " + elementId);
+		
+		
+		let person = {};
+		person['id'] = elementId;
+		person['surname'] = $("#editSurname").val();
+		person['name'] = $("#editName").val();
+		person['patronymic'] = $("#editPatronymic").val();
+		person['number'] = $("#editNumber").val();
+
+		$.ajax({
+			type: "put",
+			contentType: "application/json",
+			data: JSON.stringify(person),
+			dataType: 'json',
+			caches: false,
+			timeout: 600000,
+			url: "./api/person/",
+			async: false,
+			success: function(savedPerson) {
+				console.log(savedPerson);
+				let id = savedPerson['id'];
+				let surname = savedPerson['surname'];
+				let name = savedPerson['name'];
+				let patronymic = savedPerson["patronymic"];
+				let number = savedPerson["number"];
+				
+
+				$('#' + elementId).replaceWith("<tr id=" + id + "><td>" + surname + "</td><td>" + name + "</td><td>" + patronymic + "</td><td>" + number + "</td><td><button class='removeButton'>Удалить</button></td><td><button class='editButton'>Редактировать</button></td></tr>");
+			},
+			error: function(e) {
+
+			}
+		});
 	})
 
 
